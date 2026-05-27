@@ -1,0 +1,35 @@
+name: Extract PDF Content
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run PDF extraction pipeline
+        run: npm run extract
+
+      - name: Commit extracted files
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add public/content content assets
+          git commit -m "Auto extract PDF content" || echo "No changes"
+          git push
