@@ -27,25 +27,13 @@ const classifyPage = (text: string): string[] => {
   return tags;
 };
 
-async function writePlaceholder(reason: string) {
-  const payload = {
-    source: 'catalog/DB-General-Catalog-V4.8.pdf',
-    pages: 0,
-    warning: reason,
-    textPreview: '',
-    sections: [] as Section[]
-  };
-  await fs.mkdir('content', { recursive: true });
-  await fs.writeFile(OUTPUT_JSON, JSON.stringify(payload, null, 2));
-  console.warn(reason);
-}
-
 async function main() {
   let bytes: Buffer;
   try {
     bytes = await fs.readFile(PDF_PATH);
   } catch {
-    await writePlaceholder('PDF missing at catalog/DB-General-Catalog-V4.8.pdf. Placeholder content generated.');
+    console.error('Missing required PDF at catalog/DB-General-Catalog-V4.8.pdf');
+    process.exit(1);
     return;
   }
 

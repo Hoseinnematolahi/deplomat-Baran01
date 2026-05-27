@@ -1,0 +1,24 @@
+name: Validate Content
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate section files
+        run: |
+          set -e
+          for f in hero philosophy amenities residences penthouse smart-living architecture location; do
+            test -f "content/${f}.json"
+          done
+      - name: Reject placeholders
+        run: |
+          if rg -n "Pending extraction|Run npm run extract" content; then
+            echo "Invalid placeholder content found"
+            exit 1
+          fi
