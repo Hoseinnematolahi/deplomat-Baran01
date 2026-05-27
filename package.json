@@ -8,7 +8,9 @@
     "build": "npm run sync:content && tsc -b && vite build",
     "preview": "vite preview",
     "lint": "eslint .",
+
     "extract": "npm run extract:pdf && npm run extract:images && npm run optimize:images && npm run placeholders && npm run build:content && npm run sync:content",
+
     "extract:pdf": "tsx scripts/extract-pdf.ts",
     "extract:images": "python3 scripts/extract-images.py",
     "optimize:images": "tsx scripts/optimize-images.ts",
@@ -16,6 +18,7 @@
     "placeholders": "tsx scripts/generate-placeholders.ts",
     "sync:content": "tsx scripts/sync-content.ts"
   },
+
   "dependencies": {
     "@react-three/drei": "9.122.0",
     "@react-three/fiber": "8.17.10",
@@ -28,13 +31,16 @@
     "pdfjs-dist": "^4.6.82",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-router-dom": "^7.0.0",
     "three": "^0.169.0",
     "zustand": "^5.0.0"
   },
+
   "devDependencies": {
     "@types/node": "^22.7.5",
     "@types/react": "18.2.79",
     "@types/react-dom": "18.2.25",
+    "@types/pdf-parse": "^1.1.4",
     "@vitejs/plugin-react": "^4.3.2",
     "autoprefixer": "^10.4.20",
     "postcss": "^8.4.47",
