@@ -10,7 +10,10 @@
 4. `npm run placeholders` - Generate blurred placeholders.
 5. `npm run build:content` - Build section JSON for runtime.
 
-Run all: `npm run extract`
+Run all:
+```bash
+npm run extract
+```
 
 ## Dev
 - `npm install`
@@ -24,15 +27,12 @@ Run all: `npm run extract`
 - GitHub Actions CI
 - Vercel deployment config
 
+## Deployment flow (GitHub → Vercel)
+1. Push PDF/content changes to `main`.
+2. GitHub Actions pipeline runs extraction and asset generation.
+3. Generated `content/*`, `public/content/*`, and `assets/*` are auto-committed.
+4. Vercel deploys frontend only (`npm run build`).
+
 ## Notes
-Place the PDF at `catalog/DB-General-Catalog-V4.8.pdf` before running extraction.
-
-
-## Why deployed site shows no PDF text/images
-If `catalog/DB-General-Catalog-V4.8.pdf` is missing during extraction, `content/*.json` remains placeholder ("Pending extraction").
-
-Required before deploy:
-1. Put PDF in `catalog/DB-General-Catalog-V4.8.pdf`
-2. Run `npm run extract`
-3. Commit generated `content/*` and `public/content/*` files
-4. Deploy
+- Keep `catalog/DB-General-Catalog-V4.8.pdf` in repository for pipeline extraction.
+- Do not run extraction on Vercel build stage.
