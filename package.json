@@ -1,0 +1,47 @@
+{
+  "name": "deplomat-baran01",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "lint": "eslint .",
+    "extract": "npm run extract:pdf && npm run extract:images && npm run optimize:images && npm run placeholders && npm run build:content",
+    "extract:pdf": "tsx scripts/extract-pdf.ts",
+    "extract:images": "python3 scripts/extract-images.py",
+    "optimize:images": "tsx scripts/optimize-images.ts",
+    "build:content": "tsx scripts/build-content.ts",
+    "placeholders": "tsx scripts/generate-placeholders.ts"
+  },
+  "dependencies": {
+    "@react-three/drei": "^10.0.0",
+    "@react-three/fiber": "^9.0.0",
+    "@react-three/postprocessing": "^3.0.4",
+    "framer-motion": "^11.0.0",
+    "gsap": "^3.12.5",
+    "lenis": "^1.1.14",
+    "pdf-lib": "^1.17.1",
+    "pdf-parse": "^1.1.1",
+    "pdfjs-dist": "^4.6.82",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^7.0.0",
+    "three": "^0.169.0",
+    "zustand": "^5.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.7.5",
+    "@types/react": "^18.3.11",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.2",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.47",
+    "sharp": "^0.33.5",
+    "tailwindcss": "^3.4.13",
+    "tsx": "^4.19.1",
+    "typescript": "^5.6.2",
+    "vite": "^5.4.8"
+  }
+}
